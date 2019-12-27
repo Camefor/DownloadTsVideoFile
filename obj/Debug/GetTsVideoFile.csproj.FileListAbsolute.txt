@@ -1,0 +1,6 @@
+D:\Documents\DotNet\Solution1\GetTsVideoFile\bin\Debug\GetTsVideoFile.exe.config
+D:\Documents\DotNet\Solution1\GetTsVideoFile\bin\Debug\GetTsVideoFile.exe
+D:\Documents\DotNet\Solution1\GetTsVideoFile\bin\Debug\GetTsVideoFile.pdb
+D:\Documents\DotNet\Solution1\GetTsVideoFile\obj\Debug\GetTsVideoFile.csprojAssemblyReference.cache
+D:\Documents\DotNet\Solution1\GetTsVideoFile\obj\Debug\GetTsVideoFile.exe
+D:\Documents\DotNet\Solution1\GetTsVideoFile\obj\Debug\GetTsVideoFile.pdb
