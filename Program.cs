@@ -26,26 +26,32 @@ namespace GetTsVideoFile {
         static int ErrorCount;
         static int CurrentIndex;
         static async Task Main(string[] args) {
-            //var _result = Post("http://localhost:1881/Ext/BpRecord/ReceiveData", ")rx00|222|80|91|ra0404rbOMUDA000F");
+            // https://cn4.5311444.com/hls/20181013/2555f74c25289c0d9eadb961c1ac692d/1539419461/film_00000.ts
 
-
-
-            string BaseUrl;
+            var test01 = "https://cn4.5311444.com/hls/20181013/2555f74c25289c0d9eadb961c1ac692d/1539419461/film_00000.ts";
             Console.WriteLine("输入视频的开始地址...");
-            Console.WriteLine("         例如: {0}",
-                "https://iqiyi.com-ok-iqiyi.com/20191220/12010_ab818018/1000k/hls/2d2cb98ec7b000");
-            Console.WriteLine("实际下载地址为: {0}", "https://iqiyi.com-ok-iqiyi.com/20191220/12010_ab818018/1000k/hls/2d2cb98ec7b000000.ts");
-            BaseUrl = Console.ReadLine();
-            if (string.IsNullOrEmpty(BaseUrl)) {
-                BaseUrl = "https://iqiyi.com-ok-iqiyi.com/20191220/12010_ab818018/1000k/hls/2d2cb98ec7b000";
+            Console.WriteLine("例如: {0}", test01);
+            test01 = Console.ReadLine().Trim();
+            var ara = test01.Trim().Split('/');
+            var oneClips = ara[ara.Length - 1];//一个视频片段名称(film_00000.ts)
+            var dir = ara[ara.Length - 2];//可以当作文件夹名。或者合成的视频名称(1539419461)
+            var baseUrl = ara[ara.Length - 3];//2555f74c25289c0d9eadb961c1ac692d
+            var tar02 = oneClips.Split('.');
+            var sdsds = tar02[0];//film_00000
+            var preStr = sdsds.Split('_')[0];//film
+            var videoHeaderTs = preStr + '_';//视频文件头 + 生成的  …….ts结尾
+            var _baseUrl = test01.Remove(test01.Length - oneClips.Length);//链接地址 base  +videoHeader
+            //https://cn4.5311444.com/hls/20181013/2555f74c25289c0d9eadb961c1ac692d/1539419461/
+
+
+            var finallyDir = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, dir);
+            if (!Directory.Exists(finallyDir)) {
+                Directory.CreateDirectory(finallyDir);
             }
 
-            if (!Directory.Exists(System.AppDomain.CurrentDomain.BaseDirectory + "\\2d2cb98ec7b000\\")) {
-                Directory.CreateDirectory(System.AppDomain.CurrentDomain.BaseDirectory + "\\2d2cb98ec7b000\\");
-            }
             for (int i = 0; i < 1500; i++) {
                 CurrentIndex = i;
-            GotoNext:
+                GotoNext:
                 {
                     if (ErrorCount >= 10) {
                         i = CurrentIndex + 1;
@@ -60,27 +66,30 @@ namespace GetTsVideoFile {
                  * N : 10 --- 99  0N
                  * N : 100 ----H-00 N
                  * **/
-
+                var generalTs = "";
                 if (i <= 9) {
-                    MFileName = i.ToString("d3") + ".ts";  //加三个0
+                    generalTs = i.ToString("d5") + ".ts";  //加三个0
                 }
                 if (10 <= i && i <= 99) {
-                    MFileName = "0" + i.ToString("d2") + @".ts";
+                    generalTs = "0" + i.ToString("d4") + @".ts";
                 }
                 if (100 <= i) {
-                    MFileName = i.ToString("d1") + @".ts";
+                    generalTs = i.ToString("d3") + @".ts";
                 }
-                MURL = BaseUrl + MFileName;
+
+                var oneFile = videoHeaderTs + generalTs;//"film_00000.ts"
+                MURL = _baseUrl + oneFile;//"https://cn4.5311444.com/hls/20181013/2555f74c25289c0d9eadb961c1ac692d/1539419461/film_00000.ts"
                 DownloadFileName = i.ToString();
-                MFinallyFileName += MFileName;
-                MTsFilePath = System.AppDomain.CurrentDomain.BaseDirectory + "\\2d2cb98ec7b000\\" + MFinallyFileName;
+                //MFinallyFileName = Path.Combine(dir, oneFile);
+
+                MTsFilePath = Path.Combine(finallyDir, oneFile);//"D:\\Documents\\LearnCSharp\\DownloadTsVideoFile\\bin\\Debug\\1539419461\\film_00000.ts"
                 if (!File.Exists(MTsFilePath)) {
                     using (File.Create(MTsFilePath)) {
                         //
                     }
                     //File.Create(MTsFilePath); //https://www.cnblogs.com/hqbhonker/p/3494042.html
                 }
-            ReTry:
+                ReTry:
                 try {
                     //Thread.Sleep(500);
                     HttpResponseMessage response = await client.GetAsync(MURL);
@@ -108,7 +117,7 @@ namespace GetTsVideoFile {
                     }
                 }
             }
-        End: Console.WriteLine("下载任务结束.");
+            End: Console.WriteLine("下载任务结束.");
             Console.ReadKey();
             //System.Environment.Exit(0);
         }

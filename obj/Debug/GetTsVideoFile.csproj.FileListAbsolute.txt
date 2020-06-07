@@ -4,3 +4,10 @@ D:\Documents\DotNet\Solution1\GetTsVideoFile\bin\Debug\GetTsVideoFile.pdb
 D:\Documents\DotNet\Solution1\GetTsVideoFile\obj\Debug\GetTsVideoFile.csprojAssemblyReference.cache
 D:\Documents\DotNet\Solution1\GetTsVideoFile\obj\Debug\GetTsVideoFile.exe
 D:\Documents\DotNet\Solution1\GetTsVideoFile\obj\Debug\GetTsVideoFile.pdb
+D:\Documents\LearnCSharp\DownloadTsVideoFile\bin\Debug\GetTsVideoFile.exe.config
+D:\Documents\LearnCSharp\DownloadTsVideoFile\bin\Debug\GetTsVideoFile.exe
+D:\Documents\LearnCSharp\DownloadTsVideoFile\bin\Debug\GetTsVideoFile.pdb
+D:\Documents\LearnCSharp\DownloadTsVideoFile\obj\Debug\GetTsVideoFile.csprojAssemblyReference.cache
+D:\Documents\LearnCSharp\DownloadTsVideoFile\obj\Debug\GetTsVideoFile.csproj.CoreCompileInputs.cache
+D:\Documents\LearnCSharp\DownloadTsVideoFile\obj\Debug\GetTsVideoFile.exe
+D:\Documents\LearnCSharp\DownloadTsVideoFile\obj\Debug\GetTsVideoFile.pdb
